@@ -9,7 +9,6 @@ function controlarTiros(){
 			tiros[i].style.top=pt+"px";
 			colisaoTiroBomba(tiros[i]);
 			if(pt<0){
-				//document.body.removeChild(tiros[i]);
 				tiros[i].remove();
 			}
 		}

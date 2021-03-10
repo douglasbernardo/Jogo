@@ -34,73 +34,6 @@ function teclaUp(){
         direcaoxJ=0;
     }
 }
-
-function gerenciaPlaneta(){
-    barraPlaneta.style.width=vidaPlaneta+"px";
-    if(contBombas<=0){
-        jogo = false;
-        clearInterval(intervaloBombas);
-        telaMsg.style.backgroundImage = "url(imgs/vitoria.jpg)";
-    }
-    if(vidaPlaneta<=0){
-        jogo = false;
-        bombasTotal = document.getElementsByClassName("bomba");
-        for(i=0;i<bombasTotal.length;i++){
-            if(bombasTotal[i]){
-                bombasTotal[i].remove();//remover as bombas
-            }
-        }
-        jogador.style.display="none";
-        clearInterval(intervaloBombas);
-        telaMsg.style.backgroundImage = "url(imgs/derrota.jpg)";
-        telaMsg.style.display = "block";
-    }
-}
-
-function criarExplosao(tipo,x,y){
-
-    if(document.getElementById("explosao"+(indiceExplosao-4))){
-        document.getElementById("explosao"+(indiceExplosao-4)).remove();
-    }
-    var explosao=document.createElement("div");
-	var img=document.createElement("img");
-	var som=document.createElement("audio");
-	//Atributos para div
-	var att1=document.createAttribute("class");
-	var att2=document.createAttribute("style");
-	var att3=document.createAttribute("id");
-	//Atributo para imagem
-	var att4=document.createAttribute("src");
-	//Atributos para audio
-	var att5=document.createAttribute("src");
-	var att6=document.createAttribute("id");
-
-	att3.value="explosao"+indiceExplosao;
-	if(tipo==1){
-		att1.value="explosaoAr";
-		att2.value="top:"+y+"px;left:"+x+"px;";
-		att4.value="gifs/explosao_ar.gif?"+new Date();
-	}else{
-		att1.value="explosaoChao";
-		att2.value="top:"+(tamanhoTelaH-57)+"px;left:"+(x-17)+"px;";
-		att4.value="gifs/explosao_chao.gif?"+new Date();
-	}
-	att5.value="sons/exp1.mp3?"+new Date();
-	att6.value="som"+indiceSom;
-	explosao.setAttributeNode(att1);
-	explosao.setAttributeNode(att2);
-	explosao.setAttributeNode(att3);
-	img.setAttributeNode(att4);
-	som.setAttributeNode(att5);
-	som.setAttributeNode(att6);
-	explosao.appendChild(img);
-	explosao.appendChild(som);
-	document.body.appendChild(explosao);
-	document.getElementById("som"+indiceSom).play();
-	indiceExplosao++;
-	indiceSom++;
-}
-
 function controlarJogador(){
     PosicaoJogadory+= direcaoyJ * velJogador; //sobe -5 pixels
     PosicaoJogadorx+= direcaoxJ * velJogador; //sobe -5 pixels
@@ -130,7 +63,7 @@ function reiniciar(){
     telaMsg.style.display="none";
     clearInterval(intervaloBombas);
     cancelAnimationFrame(frame);
-    vidaPlaneta=100;
+    vidaPlaneta=300;
     PosicaoJogadorx=tamanhoTelaW/2;
     PosicaoJogadory=tamanhoTelaH/2;
     jogador.style.top=PosicaoJogadory+"px";
@@ -159,7 +92,7 @@ function iniciar(){
     contBombas=10;
     velBomba=4;
     //controle planeta
-    vidaPlaneta=100;
+    vidaPlaneta=300;
     barraPlaneta = document.getElementById("barraPlaneta");
     barraPlaneta.style.width = vidaPlaneta +"px";
     //controles explosao
